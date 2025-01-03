@@ -6,9 +6,9 @@ using Microsoft.Extensions.Configuration;
 var services = new ServiceCollection();
 
 var configuration = new ConfigurationBuilder()
-.SetBasePath(Directory.GetCurrentDirectory())
-.AddJsonFile("appSettings.json")
-.Build();
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appSettings.json")
+    .Build();
 
 services.AddSingleton<IConfiguration>(configuration);
 
@@ -20,7 +20,7 @@ services.AddScoped<IPatronService, PatronService>();
 services.AddSingleton<JsonData>();
 services.AddSingleton<ConsoleApp>();
 
-var servicesProvider = services.BuildServiceProvider();
+var serviceProvider = services.BuildServiceProvider();
 
-var consoleApp = servicesProvider.GetRequiredService<ConsoleApp>();
-consoleApp.Run().Wait();
+var consoleApp = serviceProvider.GetRequiredService<ConsoleApp>();
+await consoleApp.Run();
